@@ -1,0 +1,190 @@
+{
+    "add": {
+        "actions": [
+            {
+                "name": "text_commands.add",
+                "args": {},
+                "InvalidMessage": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "Invalid message for the add command, {sender}."
+                            }
+                        }
+                    ]
+                },
+                "CommandAlreadyExists": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "Command {arg1} already exists, {sender}."
+                            }
+                        }
+                    ]
+                },
+                "Success": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "Command {arg1} added succesfully, {sender}."
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+        
+    },
+    "edit": {
+        "actions": [
+            {
+                "name": "text_commands.edit",
+                "args": {},
+                "InvalidMessage": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "Invalid message for the edit command, {sender}."
+                            }
+                        }
+                    ]
+                },
+                "CommandDoesNotExist": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "Cannot edit a command that does not exist, {sender}."
+                            }
+                        }
+                    ]
+                },
+                "InvalidCommandType": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "You may only edit text commands, {sender}."
+                            }
+                        }
+                    ]
+                },
+                "Success": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "Command {arg1} edited successfully, {sender}."
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+        
+    },
+    "delete": {
+        "actions": [
+            {
+                "name": "text_commands.delete",
+                "args": {},
+                "InvalidMessage": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "Invalid message for the delete command, {sender}."
+                            }
+                        }
+                    ]
+                },
+                "InvalidCommandType": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "Cannot delete a non-text command, {sender}."
+                            }
+                        }
+                    ]
+                },
+                "Success": {
+                    "actions": [
+                        {
+                            "name": "text_commands.chat",
+                            "args": {
+                                "response": "Command {arg1} deleted, {sender}."
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+        
+    },
+    "printer": {
+        "actions": [
+            {
+                "name": "obs_utils.change_to_scene",
+                "args": {
+                    "scene": "3D Printer"
+                },
+                "CommandToSoon": {
+                    "actions": [
+                        {
+                            "name":"text_commands.chat",
+                            "args": {
+                                "response": "Wait another {ttw} seconds before changing scenes"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "face": {
+        "actions": [
+            {
+                "name": "obs_utils.change_to_scene",
+                "args": {
+                    "scene": "Sitting at Desk (Face only)"
+                },
+                "CommandToSoon": {
+                    "actions": [
+                        {
+                            "name":"text_commands.chat",
+                            "args": {
+                                "response": "Wait another {ttw} seconds before changing scenes"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "code": {
+        "actions": [
+            {
+                "name": "obs_utils.change_to_scene",
+                "args": {
+                    "scene": "Code/CAD"
+                },
+                "CommandToSoon": {
+                    "actions": [
+                        {
+                            "name":"text_commands.chat",
+                            "args": {
+                                "response": "Wait another {ttw} seconds before changing scenes"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+
+}

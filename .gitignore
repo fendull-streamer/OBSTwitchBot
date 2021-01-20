@@ -1,0 +1,6 @@
+*.dir
+*.bak
+*.dat
+
+__pycache__/
+Plugines/__pycache__/
