@@ -123,68 +123,6 @@
                     ]
                 }
             }
-        ]
-        
-    },
-    "printer": {
-        "actions": [
-            {
-                "name": "obs_utils.change_to_scene",
-                "args": {
-                    "scene": "3D Printer"
-                },
-                "CommandToSoon": {
-                    "actions": [
-                        {
-                            "name":"text_commands.chat",
-                            "args": {
-                                "response": "Wait another {ttw} seconds before changing scenes"
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    "face": {
-        "actions": [
-            {
-                "name": "obs_utils.change_to_scene",
-                "args": {
-                    "scene": "Sitting at Desk (Face only)"
-                },
-                "CommandToSoon": {
-                    "actions": [
-                        {
-                            "name":"text_commands.chat",
-                            "args": {
-                                "response": "Wait another {ttw} seconds before changing scenes"
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    "code": {
-        "actions": [
-            {
-                "name": "obs_utils.change_to_scene",
-                "args": {
-                    "scene": "Code/CAD"
-                },
-                "CommandToSoon": {
-                    "actions": [
-                        {
-                            "name":"text_commands.chat",
-                            "args": {
-                                "response": "Wait another {ttw} seconds before changing scenes"
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
+        ]   
     }
-
 }

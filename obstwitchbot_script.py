@@ -1,14 +1,13 @@
-from obstwitchbot import *
 import obspython as obs
 import time
 import os
 import importlib.util
-BOT_PATH = "C:\\Users\\johnc\\Documents\\NewNotFendull\\"
+BOT_PATH = ""
 
-spec = importlib.util.spec_from_file_location("notfendull", BOT_PATH + "notfendull.py")
-nf = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(nf)
-bot = nf.OBSTwitchBot(settings_path=BOT_PATH)
+spec = importlib.util.spec_from_file_location("obstwitchbot", BOT_PATH + "obstwitchbot.py")
+obstb = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(obstb)
+bot = obstb.OBSTwitchBot(settings_path=BOT_PATH)
 
 def script_load(settings):
 	try:
