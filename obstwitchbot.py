@@ -5,6 +5,7 @@ from twitchbot import *
 import time
 import importlib.util
 import os
+import re
 
 COMMAND_DB = 'COMMANDS'
 DEFAULT_COMMAND_FILE = 'command_config.json'
@@ -14,6 +15,15 @@ DEFAULT_CONFIG_FILE = 'default_config.json'
 PLUGINS_PATH = "Plugins"
 
 
+
+def get_action_info(action):
+    if action.__doc__ is None:
+        return None
+    
+    text = action.__doc__.split(':Description:')[1].split(":Args:")
+    description = text[0]
+    text = text[1].split( )
+
 class BotProcess:
     def __init__(self, parent, settings_path):
         self.command_store = None
@@ -21,6 +31,7 @@ class BotProcess:
         self.bot = None
         self.parent = parent
         self.settings_path = settings_path
+        
 
     def __enter__(self):
         self.command_store = initialize_command_store(self.settings_path)
@@ -48,9 +59,12 @@ class BotProcess:
             plugin.shutdown(self.parent)
 
 class OBSTwitchBot(threading.Thread):
-
+    def list_commands(self):
+        for k in self.bot.command_store:
+            print(k)
     def load_plugins(self):
             self.plugins = {}
+            self.actions = {}
             for fname in os.listdir(self.settings_path + PLUGINS_PATH):
                 if fname.endswith('.py') is True:
                     module_name = fname.split('.')[0]
@@ -59,9 +73,18 @@ class OBSTwitchBot(threading.Thread):
                         spec = importlib.util.spec_from_file_location(module_name, relative_path)
                         plugin = importlib.util.module_from_spec(spec)
                         spec.loader.exec_module(plugin)
-                        plugin.setup(self)
                         self.plugins[module_name] = plugin
-                    except:
+                        plugin.setup(self)
+                        for attr in plugin.__dir__():
+                            attr = getattr(plugin, attr)
+                            if callable(attr) is True:
+                                varnames = attr.__code__.co_varnames
+                                if len(varnames) > 2:
+                                    if varnames[0] == 'bot' and varnames[1] == 'message' and varnames[2] == 'args':
+                                        print(attr.__name__)
+                                        print(attr.__doc__)
+                    except Exception as e:
+                        print(e)
                         print("Failed to add module '{}'".format(module_name))
 
     def __init__(self, settings_path=""):
@@ -69,15 +92,18 @@ class OBSTwitchBot(threading.Thread):
         self.settings_path = settings_path
         self.bot = None
         self.is_running = False
-        print(os.listdir())
+        self.plugins_path = PLUGINS_PATH
         self.load_plugins()
+        
 
         
 
     def run(self):
         self.is_running = True
         with BotProcess(self, self.settings_path) as bot:
+            
             self.bot = bot
+            self.list_commands()
             while self.is_running:
                 time.sleep(2)
 

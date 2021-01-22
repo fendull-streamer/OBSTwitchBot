@@ -1,9 +1,17 @@
 import json
 
+def setup(bot):
+    pass
+
 def shutdown(bot):
     pass
 
 def chat(bot, message, args):
+    """
+    :Description: Will send a message to chat. A message can be templated so that it replaces parts of the message with values from the message it's replying to.
+    :Args: (response, The message or message template you want to be chatted.)
+    :Return: (Success, The message was successfully sent.), (Failure, The message could not be sent.)
+    """
     
     try:
         response = args['response']
@@ -19,6 +27,11 @@ def chat(bot, message, args):
         return 'Failure'
 
 def add(bot, message, args):
+    """
+    :Description: Adds a text-based chat command to the local database.
+    :Args:
+    :Return: (Success, The command was successfully created.), (InvalidMessage, The user didn't supply enough values to enact this command.), (CommandAlreadyExists, When the command to be added already exists.)
+    """
     split_message = message['text'].split(' ')
     if len(split_message) < 3:
         return 'InvalidMessage'
@@ -47,7 +60,12 @@ def add(bot, message, args):
     return 'Success'
 
 def edit(bot, message, args):
-
+    """
+    :Description: Edits an existing command in the database.
+    :Args:
+    :Return: (Success, The command was successfully edited.), (InvalidMessage, The user didn't supply enough values to enact this command.), (CommandDoesNotExist, When the command to be edited does not exist.)
+    (InvalidCommandType, When the user tries to edit a non-text command.)
+    """
     split_message = message['text'].split(' ')
     if len(split_message) < 3:
         return 'InvalidMessage'
@@ -80,7 +98,12 @@ def edit(bot, message, args):
     return 'Success'
     
 def delete(bot, message, args):
-    
+    """
+    :Description: Deletes an existing command in the database.
+    :Args:
+    :Return: (Success, The command was successfully deleted.), (InvalidMessage, The user didn't supply enough values to enact this command.), (CommandDoesNotExist, When the command to be edited does not exist.)
+    (InvalidCommandType, When the user tries to edit a non-text command.)
+    """
     split_message = message['text'].split(' ')
     if len(split_message) < 2:
         return 'InvalidMessage'
@@ -99,7 +122,7 @@ def delete(bot, message, args):
     except Exception as e:
         print("Command '{}' does not exist".format(command_name))
         print(e)
-        return 'Failure'
+        return 'CommandDoesNotExist'
     return 'Success'
 
 def message_builder(message, response):

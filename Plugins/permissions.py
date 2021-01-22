@@ -8,8 +8,9 @@ permissions_store = {}
 
 def setup(bot):
     settings_path = bot.settings_path
-    permissions_store = dbm.open(settings_path + PERMISSIONS_DB)
-    with open(settings_path + PERMISSIONS_DEFAULT) as f:
+    plugins_path = bot.plugins_path
+    permissions_store = dbm.open(settings_path + PERMISSIONS_DB, 'c')
+    with open(settings_path + plugins_path + "\\" + PERMISSIONS_DEFAULT) as f:
         default_commands = json.load(f)
     for key, value in default_commands.items():
         permissions_store[key] = json.dumps(value)
